@@ -1,4 +1,4 @@
-import unittest,json
+import unittest, json
 
 from main import app
 
@@ -19,6 +19,17 @@ class FlaskTestCase(unittest.TestCase):
         self.assertEqual(resp['answer'],35,'Multiply endpoint failed known answer 7*5 = 35')
 
     # TODO DEFINE TWO MORE TESTS ON THE END POINTS
+    def test_touppercase(self):
+        response = self.app.get('/touppercase?s=hallo')
+        resp = response.data.decode()
+        self.assertEqual(resp, 'HALLO', 'To uppercase test has failed')
+
+    def test_hello(self):
+        response = self.app.get('/')
+        resp = response.data.decode()
+        self.assertEqual(resp, 'Hello World!', 'Error on the api root page')
+
+
 
 
 if __name__ == '__main__':
